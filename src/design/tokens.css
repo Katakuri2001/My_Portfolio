@@ -1,0 +1,47 @@
+:root {
+  /* OBSIDIAN color system */
+  --bg-primary: #050507;
+  --bg-secondary: #0A0A0F;
+  --bg-elevated: #11111A;
+
+  --accent-blue: #5B8CFF;
+  --accent-violet: #A78BFA;
+  --silver: #D9DEEA;
+  --muted: #9299AA;
+
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.12);
+
+  /* motion */
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 180ms;
+  --dur-base: 400ms;
+  --dur-slow: 800ms;
+
+  /* spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+}
+
+html { background: var(--bg-primary); }
+
+body {
+  background: var(--bg-primary);
+  color: var(--silver);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

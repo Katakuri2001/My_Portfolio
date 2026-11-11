@@ -1,0 +1,80 @@
+[
+  {
+    "id": "aurora-commerce",
+    "slug": "aurora-commerce",
+    "title": "Aurora Commerce",
+    "category": "conceptual",
+    "summary": "A conceptual storefront exploring catalog browsing, cart state, and checkout flow.",
+    "description": "A self-initiated concept project exploring the structure of a modern e-commerce experience: product catalog, filtering, cart state, and a multi-step checkout. Built to study state management and UX patterns rather than to serve real transactions.",
+    "tech": ["React", "TypeScript", "Tailwind CSS", "Zustand"],
+    "liveUrl": null,
+    "githubUrl": null,
+    "imageKey": null,
+    "featured": true
+  },
+  {
+    "id": "signal-analytics",
+    "slug": "signal-analytics",
+    "title": "Signal Analytics",
+    "category": "conceptual",
+    "summary": "A dashboard concept for visualizing time-series metrics and alerts.",
+    "description": "An experimental analytics dashboard exploring data visualization, responsive chart layouts, and alert affordances. Focused on information density and readability rather than production data pipelines.",
+    "tech": ["React", "TypeScript", "Recharts", "Tailwind CSS"],
+    "liveUrl": null,
+    "githubUrl": null,
+    "imageKey": null,
+    "featured": true
+  },
+  {
+    "id": "forge-api",
+    "slug": "forge-api",
+    "title": "Forge API",
+    "category": "personal",
+    "summary": "A personal REST API experiment with auth and resource endpoints.",
+    "description": "A personal backend experiment implementing a small REST API with authentication, validation, and resource CRUD. Used to refine API design, error handling, and documentation habits.",
+    "tech": ["Node.js", "Express.js", "JWT", "MySQL"],
+    "liveUrl": null,
+    "githubUrl": null,
+    "imageKey": null,
+    "featured": false
+  },
+  {
+    "id": "atlas-docs",
+    "slug": "atlas-docs",
+    "title": "Atlas Docs",
+    "category": "conceptual",
+    "summary": "A documentation site concept with search and structured navigation.",
+    "description": "A concept documentation experience exploring sidebar navigation, full-text search, and code block presentation. Aimed at improving developer-facing readability.",
+    "tech": ["React", "TypeScript", "MDX", "Tailwind CSS"],
+    "liveUrl": null,
+    "githubUrl": null,
+    "imageKey": null,
+    "featured": false
+  },
+  {
+    "id": "pulse-monitor",
+    "slug": "pulse-monitor",
+    "title": "Pulse Monitor",
+    "category": "personal",
+    "summary": "A personal uptime/health monitoring experiment.",
+    "description": "A personal experiment in health-check polling and status presentation. Explores lightweight monitoring concepts and clear status communication.",
+    "tech": ["Node.js", "Cloudflare Workers", "D1"],
+    "liveUrl": null,
+    "githubUrl": null,
+    "imageKey": null,
+    "featured": false
+  },
+  {
+    "id": "nimbus-studio",
+    "slug": "nimbus-studio",
+    "title": "Nimbus Studio",
+    "category": "conceptual",
+    "summary": "A landing-page concept for a creative studio.",
+    "description": "A self-initiated landing page concept exploring hero composition, motion, and brand presentation for a fictional creative studio. Design exercise only.",
+    "tech": ["React", "Framer Motion", "Tailwind CSS"],
+    "liveUrl": null,
+    "githubUrl": null,
+    "imageKey": null,
+    "featured": false
+  }
+]
