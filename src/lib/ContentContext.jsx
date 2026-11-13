@@ -26,6 +26,7 @@ const DEFAULTS = {
     twitter: '',
   },
   footer: { name: 'Kaung Set Hmue', title: 'Website Engineer' },
+  projectCategories: ['completed', 'personal', 'conceptual'],
   skills: { categories: [
     { key: 'FRONTEND', skills: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Next.js'] },
     { key: 'BACKEND', skills: ['Node.js', 'Nest.js', 'Hono', 'Java', 'JWT', 'Prisma'] },

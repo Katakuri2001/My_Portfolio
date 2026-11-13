@@ -102,7 +102,7 @@ export default function Projects() {
 
   return (
     <Section id="projects">
-      <div className="w-full" style={{ height: '560px', position: 'relative' }}>
+      <div className="w-full" style={{ height: 'clamp(320px, 50vh, 560px)', position: 'relative' }}>
         <FlexCarousel items={flexCarouselItems || undefined} preset="liquid" intro="rise" cardHeight={0.5} gap={12} squeeze={0.2} focusOnClick captions />
       </div>
       <Container>

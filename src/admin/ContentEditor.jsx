@@ -34,6 +34,7 @@ export default function ContentEditor() {
   const [contact, setContact] = useState(null);
   const [footer, setFooter] = useState(null);
   const [skills, setSkills] = useState(null);
+  const [projectCategories, setProjectCategories] = useState(null);
   const [status, setStatus] = useState('');
   const [error, setError] = useState('');
 
@@ -44,6 +45,7 @@ export default function ContentEditor() {
     setContact({ ...content.contact });
     setFooter({ ...content.footer });
     setSkills(content.skills ? JSON.parse(JSON.stringify(content.skills)) : { categories: [] });
+    setProjectCategories(content.projectCategories ? [...content.projectCategories] : []);
   }, [loading, content]);
 
   const save = async (section, data, setter) => {
@@ -121,6 +123,22 @@ export default function ContentEditor() {
         <p className="text-xs text-muted">Edit categories and skill names. Icons are mapped automatically by skill name.</p>
         <Field label="SKILLS JSON" value={JSON.stringify(skills, null, 2)} onChange={(v) => { try { setSkills(JSON.parse(v)); setError(''); } catch { setError('Invalid JSON'); } }} textarea rows={12} />
         <Button onClick={() => save('skills', skills, setSkills)}>Save Skills</Button>
+      </GlassCard>
+
+      <GlassCard className="p-6 space-y-4">
+        <h2 className="text-lg font-semibold text-white">Project Categories</h2>
+        <p className="text-xs text-muted">Manage the categories available when creating/editing projects.</p>
+        <div className="space-y-2">
+          {(projectCategories || []).map((cat, i) => (
+            <div key={i} className="flex gap-2">
+              <input value={cat} onChange={(e) => { const arr = [...projectCategories]; arr[i] = e.target.value; setProjectCategories(arr); }}
+                className="flex-1 px-3 py-2 bg-white/[0.03] border border-white/10 rounded-lg text-silver" />
+              <button onClick={() => setProjectCategories(projectCategories.filter((_, j) => j !== i))} className="px-3 text-red-300">✕</button>
+            </div>
+          ))}
+          <button onClick={() => setProjectCategories([...(projectCategories || []), 'new-category'])} className="text-xs text-accent-blue">+ Add category</button>
+        </div>
+        <Button onClick={() => save('projectCategories', projectCategories, setProjectCategories)}>Save Categories</Button>
       </GlassCard>
     </div>
   );

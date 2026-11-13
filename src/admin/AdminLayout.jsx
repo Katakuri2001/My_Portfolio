@@ -3,6 +3,7 @@ import { Routes, Route, NavLink, useNavigate, useParams, Link } from 'react-rout
 import GlassCard from '../components/ui/GlassCard';
 import Button from '../components/ui/Button';
 import ContentEditor from './ContentEditor';
+import { useContent } from '../lib/ContentContext.jsx';
 
 const API_BASE = import.meta.env.VITE_API_BASE || '';
 
@@ -117,7 +118,11 @@ function ProjectForm() {
   const { id } = useParams();
   const navigate = useNavigate();
   const isEdit = Boolean(id);
-  const [form, setForm] = useState({ slug: '', title: '', category: 'conceptual', summary: '', description: '', tech: '', liveUrl: '', githubUrl: '', imageKey: '', featured: false, sortOrder: 0 });
+  const { content } = useContent();
+  const categories = content.projectCategories || ['completed', 'personal', 'conceptual'];
+  const [form, setForm] = useState({ slug: '', title: '', category: categories[0] || '', summary: '', description: '', tech: '', liveUrl: '', githubUrl: '', imageKey: '', featured: false, sortOrder: 0 });
+  const [newCategory, setNewCategory] = useState('');
+  const [creatingCat, setCreatingCat] = useState(false);
   const [loading, setLoading] = useState(isEdit);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState('');
@@ -162,8 +167,20 @@ function ProjectForm() {
   const onSubmit = async (e) => {
     e.preventDefault();
     setError(null); setStatus('Saving…');
+    let category = form.category;
+    if (creatingCat && newCategory.trim()) {
+      category = newCategory.trim();
+      // persist new category
+      try {
+        const updated = [...new Set([...categories, category])];
+        const { saveContent } = await import('../lib/content.js');
+        await saveContent('projectCategories', updated);
+      } catch (err) {
+        // non-fatal
+      }
+    }
     const payload = {
-      slug: form.slug, title: form.title, category: form.category, summary: form.summary,
+      slug: form.slug, title: form.title, category, summary: form.summary,
       description: form.description, tech: form.tech.split(',').map((t) => t.trim()).filter(Boolean),
       liveUrl: form.liveUrl || null, githubUrl: form.githubUrl || null,
       imageKey: form.imageKey || null, featured: form.featured, sortOrder: Number(form.sortOrder) || 0,
@@ -203,11 +220,20 @@ function ProjectForm() {
         {field('TITLE', 'title', 'text', { required: true })}
         <div>
           <label className="block text-xs font-mono tracking-widest text-muted mb-2">CATEGORY</label>
-          <select name="category" value={form.category} onChange={onChange} className="w-full px-4 py-3 bg-white/[0.03] border border-white/10 rounded-lg text-silver focus:outline-none focus:border-accent-blue">
-            <option value="completed">Completed</option>
-            <option value="personal">Personal</option>
-            <option value="conceptual">Conceptual</option>
-          </select>
+          {!creatingCat ? (
+            <div className="flex gap-2">
+              <select value={form.category} onChange={onChange} name="category" className="flex-1 px-4 py-3 bg-white/[0.03] border border-white/10 rounded-lg text-silver focus:outline-none focus:border-accent-blue">
+                {categories.map((cat) => (<option key={cat} value={cat}>{cat}</option>))}
+              </select>
+              <button type="button" onClick={() => setCreatingCat(true)} className="px-3 py-2 rounded-lg border border-white/10 text-silver hover:bg-white/[0.04] text-sm">+ New</button>
+            </div>
+          ) : (
+            <div className="flex gap-2">
+              <input value={newCategory} onChange={(e) => setNewCategory(e.target.value)} placeholder="new category name"
+                className="flex-1 px-4 py-3 bg-white/[0.03] border border-white/10 rounded-lg text-silver focus:outline-none focus:border-accent-blue" />
+              <button type="button" onClick={() => setCreatingCat(false)} className="px-3 py-2 rounded-lg border border-white/10 text-muted hover:text-white text-sm">Cancel</button>
+            </div>
+          )}
         </div>
         {field('SUMMARY', 'summary', 'text', { required: true })}
         {field('DESCRIPTION', 'description', 'textarea', { rows: 5, required: true })}
